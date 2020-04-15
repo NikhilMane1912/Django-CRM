@@ -28,3 +28,7 @@ elasticsearch==2.3
 python-memcached==1.59
 boto==2.49.0
 django-settings-export==1.2.1
+whitenoise
+python-decouple
+dj-database-url
+gunicorn

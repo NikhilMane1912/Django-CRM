@@ -168,11 +168,11 @@ elif STORAGE_TYPE == 's3-storage':
         'CacheControl': 'max-age=86400',
     }
 
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
     DEFAULT_S3_PATH = "media"
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
     STATIC_S3_PATH = "static"
     COMPRESS_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 
