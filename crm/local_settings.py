@@ -18,7 +18,7 @@ EMAIL_USE_TLS = True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'djangocrm1912',
+        'NAME': 'dd96v3avhpjfs0',
         'USER': 'aoobrebuyfnrku',
         'PASSWORD': '2430c7d85a7aec13d36f6ef89c6fc77a7c0c8c7e61cecab5bcc79a128f8a1064',
         'HOST': 'ec2-34-197-212-240.compute-1.amazonaws.com',
