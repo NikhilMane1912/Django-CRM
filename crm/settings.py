@@ -387,16 +387,10 @@ if SENTRY_ENABLED and not DEBUG:
 # HAYSTACK_DEFAULT_OPERATOR = 'AND'
 
 # Load the local settings file if it exists
-if DEBUG:
-    try:
-        from .dev_settings import *
-    except ImportError:
-        raise ImproperlyConfigured("No dev settings file found")
+if os.path.isfile('crm/local_settings.py'):
+    from .local_settings import *
 else:
-    try:
-        from .local_settings import *
-    except ImportError:
-        raise ImproperlyConfigured("No local settings file found")
+    print("No local settings file found")
 
 CACHES = {
     'default': {
