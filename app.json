@@ -3,6 +3,6 @@
   "description": "Self-hosted app",
   "repository": "https://github.com/NikhilMane1912/Django-CRM",
   "scripts": {
-    "postdeploy": "python manage.py makemigrations && python manage.py migrate"
+    "postdeploy": "pip install -r requirements.txt && python manage.py makemigrations && python manage.py migrate"
   }
 }
