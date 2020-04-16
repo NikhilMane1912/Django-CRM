@@ -69,7 +69,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django_settings_export.settings_export',
             ],
         },
     },
@@ -151,10 +150,10 @@ STORAGE_TYPE = os.getenv('STORAGE_TYPE', 'normal')
 if STORAGE_TYPE == 'normal':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
     STATIC_URL = '/static/'
-    # STATICFILES_DIRS = (BASE_DIR + '/static',)
-    # COMPRESS_ROOT = BASE_DIR + '/static/'
+    STATICFILES_DIRS = (BASE_DIR + '/static',)
+    COMPRESS_ROOT = BASE_DIR + '/static/'
 
 elif STORAGE_TYPE == 's3-storage':
 
@@ -184,7 +183,10 @@ elif STORAGE_TYPE == 's3-storage':
 
     MEDIA_ROOT = '/%s/' % DEFAULT_S3_PATH
     MEDIA_URL = '//%s/%s/' % (S3_DOMAIN, DEFAULT_S3_PATH)
-    STATIC_ROOT = "/%s/" % STATIC_S3_PATH
+    PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+    # STATIC_ROOT = "/%s/" % STATIC_S3_PATH
     STATIC_URL = 'https://%s/' % (S3_DOMAIN)
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
