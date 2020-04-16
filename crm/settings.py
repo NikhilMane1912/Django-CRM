@@ -214,13 +214,13 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_REBUILD_TIMEOUT = 5400
 
-# COMPRESS_OUTPUT_DIR = 'cache'
-# COMPRESS_URL = STATIC_URL
+COMPRESS_OUTPUT_DIR = 'cache'
+COMPRESS_URL = STATIC_URL
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
-    # ('text/x-sass', 'sass {infile} {outfile}'),
-    # ('text/x-scss', 'sass {infile} {outfile}'),
+    ('text/x-sass', 'sass {infile} {outfile}'),
+    ('text/x-scss', 'sass {infile} {outfile}'),
 ('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
