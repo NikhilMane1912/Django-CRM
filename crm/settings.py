@@ -69,7 +69,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django_settings_export.settings_export',
             ],
         },
     },
@@ -91,7 +90,7 @@ DATABASES = {
     }
 }
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -151,10 +150,10 @@ STORAGE_TYPE = os.getenv('STORAGE_TYPE', 'normal')
 if STORAGE_TYPE == 'normal':
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
     MEDIA_URL = '/media/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
     STATIC_URL = '/static/'
-    # STATICFILES_DIRS = (BASE_DIR + '/static',)
-    # COMPRESS_ROOT = BASE_DIR + '/static/'
+    STATICFILES_DIRS = (BASE_DIR + '/static',)
+    COMPRESS_ROOT = BASE_DIR + '/static/'
 
 elif STORAGE_TYPE == 's3-storage':
 
