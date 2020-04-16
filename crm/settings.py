@@ -9,7 +9,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'SECRET_SECRET_SECRET'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG_STATUS', False)
+DEBUG = os.getenv('DEBUG_STATUS', True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -69,7 +69,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django_settings_export.settings_export',
             ],
         },
     },
@@ -91,7 +90,7 @@ DATABASES = {
     }
 }
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"), ]
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -184,7 +183,10 @@ elif STORAGE_TYPE == 's3-storage':
 
     MEDIA_ROOT = '/%s/' % DEFAULT_S3_PATH
     MEDIA_URL = '//%s/%s/' % (S3_DOMAIN, DEFAULT_S3_PATH)
-    STATIC_ROOT = "/%s/" % STATIC_S3_PATH
+    PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
+    STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
+
+    # STATIC_ROOT = "/%s/" % STATIC_S3_PATH
     STATIC_URL = 'https://%s/' % (S3_DOMAIN)
     ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
@@ -194,7 +196,7 @@ elif STORAGE_TYPE == 's3-storage':
     AWS_ENABLED = True
     AWS_S3_SECURE_URLS = True
 
-COMPRESS_ROOT = BASE_DIR + '/static/'
+# COMPRESS_ROOT = BASE_DIR + '/static/'
 
 COMPRESS_ENABLED = True
 
@@ -212,18 +214,19 @@ COMPRESS_CSS_FILTERS = [
     'compressor.filters.css_default.CssAbsoluteFilter', 'compressor.filters.cssmin.CSSMinFilter']
 COMPRESS_REBUILD_TIMEOUT = 5400
 
-COMPRESS_OUTPUT_DIR = 'CACHE'
-COMPRESS_URL = STATIC_URL
+# COMPRESS_OUTPUT_DIR = 'cache'
+# COMPRESS_URL = STATIC_URL
 
 COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
-    ('text/x-sass', 'sass {infile} {outfile}'),
-    ('text/x-scss', 'sass {infile} {outfile}'),
+    # ('text/x-sass', 'sass {infile} {outfile}'),
+    # ('text/x-scss', 'sass {infile} {outfile}'),
+('text/x-scss', 'django_libsass.SassCompiler'),
 )
 
-COMPRESS_OFFLINE_CONTEXT = {
-    'STATIC_URL': 'STATIC_URL',
-}
+# COMPRESS_OFFLINE_CONTEXT = {
+#     'STATIC_URL': 'STATIC_URL',
+# }
 
 DEFAULT_FROM_EMAIL = 'no-reply@django-crm.micropyramid.com'
 
@@ -392,6 +395,7 @@ if os.path.isfile('crm/local_settings.py'):
     from .local_settings import *
 else:
     print("No local settings file found")
+
 
 CACHES = {
     'default': {
